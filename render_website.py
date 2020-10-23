@@ -12,7 +12,7 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
-template = env.get_template('template.html')
+template = env.get_template('templates/template.html')
 
 rendered_page = template.render(
     books_dict=books_dict,
