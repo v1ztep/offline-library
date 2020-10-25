@@ -7,7 +7,7 @@
 Для запуска библиотеки у вас уже должен быть установлен Python 3.
 
 - Скачайте код
-- Скачайте книги используя [парсер книг сайта tululu.org](https://github.com/v1ztep/Parser-online-library).
+- Скачайте книги используя [парсер книг c сайта tululu.org](https://github.com/v1ztep/Parser-online-library).
 - Установите зависимости командой `pip install -r requirements.txt`
 - Запустите сайт командой `python render_website.py`
 
