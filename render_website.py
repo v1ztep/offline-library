@@ -28,7 +28,7 @@ def on_reload():
     print("Site rebuilded")
 
 
-with open("static/description.json", "r", encoding="utf8") as my_file:
+with open("media/description.json", "r", encoding="utf8") as my_file:
     books_json = my_file.read()
 books_list = json.loads(books_json)
 grouped_by_twenty_books_list = list(chunked(books_list, 20))
