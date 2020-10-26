@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -15,19 +15,19 @@
 
   <div class="container">
     <div class="row">
-      {% for two_books_list in group_books_list %}
+      {% for two_books_list in grouped_by_two_books_list %}
         {% for book_dict in two_books_list %}
           <div class="col">
             <div class="card mb-3" style="max-width: 540px;">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="{{book_dict.image_path|urlencode}}" class="card-img" alt="{{book_dict.title}}, {{book_dict.author}}">
+                  <img src="../{{book_dict.image_path|urlencode}}" class="card-img" alt="{{book_dict.title}}, {{book_dict.author}}">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">{{book_dict.title}}</h5>
                     <p class="card-text">{{book_dict.author}}</p>
-                    <p class="card-text"><small class="text-muted"><a href="{{book_dict.book_path|urlencode}}" target="_blank">Читать</a></small></p>
+                    <p class="card-text"><small class="text-muted"><a href="../{{book_dict.book_path|urlencode}}" target="_blank">Читать</a></small></p>
                   </div>
                 </div>
               </div>
