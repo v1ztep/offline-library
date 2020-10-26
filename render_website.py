@@ -3,6 +3,7 @@ import json
 from livereload import Server
 from more_itertools import chunked
 import os
+import math
 
 
 def on_reload():
@@ -13,14 +14,16 @@ def on_reload():
 
     template = env.get_template('templates/template.html')
 
-    for page_number, twenty_books_list in enumerate(grouped_by_twenty_books_list, 1):
+    for page_current_number, twenty_books_list in enumerate(grouped_by_twenty_books_list, 1):
         grouped_by_two_books_list = list(chunked(twenty_books_list, 2))
 
         rendered_page = template.render(
             grouped_by_two_books_list=grouped_by_two_books_list,
+            pages_amount=pages_amount,
+            page_current_number=page_current_number,
         )
 
-        with open(f'pages/index{page_number}.html', 'w', encoding="utf8") as file:
+        with open(f'pages/index{page_current_number}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
     print("Site rebuilded")
 
@@ -29,6 +32,8 @@ with open("static/description.json", "r", encoding="utf8") as my_file:
     books_json = my_file.read()
 books_list = json.loads(books_json)
 grouped_by_twenty_books_list = list(chunked(books_list, 20))
+pages_amount = math.ceil(len(books_list)/20)
+
 
 os.makedirs('pages', exist_ok=True)
 
