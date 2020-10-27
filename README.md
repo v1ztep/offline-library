@@ -4,7 +4,7 @@
 
 ## Запуск
 
-Для запуска библиотеки у вас уже должен быть установлен Python 3.
+Для запуска библиотеки у вас уже должен быть установлен [Python 3](https://www.python.org/downloads/release/python-379/).
 
 - Скачайте код
 - Скачайте книги используя [парсер книг c сайта tululu.org](https://github.com/v1ztep/Parser-online-library), обязательный аргумент парсера `--dest_folder media`. Скопируйте итоговую папку(media) в корень "offline-library".
