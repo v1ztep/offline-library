@@ -4,6 +4,8 @@
 
 Пример работы сайта на [GitHub-Pages](https://v1ztep.github.io/offline-library_GitHub-Pages/pages/index1.html).
 
+[GitHub репозиторий](https://github.com/v1ztep/offline-library_GitHub-Pages) сайта с информацией по деплою сайта на GitHub-Pages.
+
 ## Запуск
 
 Для запуска библиотеки у вас уже должен быть установлен [Python 3](https://www.python.org/downloads/release/python-379/).
