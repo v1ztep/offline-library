@@ -4,7 +4,7 @@
 
 Пример работы сайта на [GitHub-Pages](https://v1ztep.github.io/offline-library_GitHub-Pages/pages/index1.html).
 
-[GitHub репозиторий](https://github.com/v1ztep/offline-library_GitHub-Pages) с информацией по деплою сайта на GitHub-Pages.
+[GitHub репозиторий](https://github.com/v1ztep/offline-library_GitHub-Pages) сайта на GitHub-Pages с информацией по деплою.
 
 ## Запуск
 
