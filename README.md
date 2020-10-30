@@ -1,6 +1,6 @@
 # Офлайн библиотека
 
-Офлайн библиотека, спарсенных книг с сайта [tululu.org](https://tululu.org/).
+Офлайн библиотека спарсенных книг с сайта [tululu.org](https://tululu.org/).
 
 Пример работы сайта на [GitHub-Pages](https://v1ztep.github.io/offline-library_GitHub-Pages/pages/index1.html).
 
