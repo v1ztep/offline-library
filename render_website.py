@@ -9,15 +9,21 @@ BOOKS_PER_PAGE_NUMBER = 20
 
 
 def on_reload():
+    with open("media/description.json", "r", encoding="utf8") as my_file:
+        books_json = my_file.read()
+    books_list = json.loads(books_json)
+
+    grouped_books_list = list(chunked(books_list, BOOKS_PER_PAGE_NUMBER))
+    pages_amount = math.ceil(len(books_list) / BOOKS_PER_PAGE_NUMBER)
+
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
-
     template = env.get_template('templates/template.html')
 
-    for page_current_number, twenty_books_list in enumerate(grouped_by_twenty_books_list, 1):
-        grouped_by_two_books_list = list(chunked(twenty_books_list, 2))
+    for page_current_number, per_page_books_list in enumerate(grouped_books_list, start=1):
+        grouped_by_two_books_list = list(chunked(per_page_books_list, 2))
 
         rendered_page = template.render(
             grouped_by_two_books_list=grouped_by_two_books_list,
@@ -30,19 +36,15 @@ def on_reload():
     print("Site rebuilded")
 
 
-with open("media/description.json", "r", encoding="utf8") as my_file:
-    books_json = my_file.read()
-books_list = json.loads(books_json)
+def main():
+    os.makedirs('pages', exist_ok=True)
 
-grouped_by_twenty_books_list = list(chunked(books_list, BOOKS_PER_PAGE_NUMBER))
-pages_amount = math.ceil(len(books_list) / BOOKS_PER_PAGE_NUMBER)
+    on_reload()
+    server = Server()
+    server.watch('templates/template.html', on_reload)
+    server.serve(root='.')
 
-os.makedirs('pages', exist_ok=True)
 
-on_reload()
+if __name__ == '__main__':
+    main()
 
-server = Server()
-
-server.watch('templates/template.html', on_reload)
-
-server.serve(root='.')
