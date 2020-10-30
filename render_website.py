@@ -5,6 +5,8 @@ from more_itertools import chunked
 import os
 import math
 
+BOOKS_PER_PAGE_NUMBER = 20
+
 
 def on_reload():
     env = Environment(
@@ -31,9 +33,9 @@ def on_reload():
 with open("media/description.json", "r", encoding="utf8") as my_file:
     books_json = my_file.read()
 books_list = json.loads(books_json)
-grouped_by_twenty_books_list = list(chunked(books_list, 20))
-pages_amount = math.ceil(len(books_list)/20)
 
+grouped_by_twenty_books_list = list(chunked(books_list, BOOKS_PER_PAGE_NUMBER))
+pages_amount = math.ceil(len(books_list) / BOOKS_PER_PAGE_NUMBER)
 
 os.makedirs('pages', exist_ok=True)
 
@@ -44,4 +46,3 @@ server = Server()
 server.watch('templates/template.html', on_reload)
 
 server.serve(root='.')
-
