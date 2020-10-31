@@ -2,7 +2,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import json
 from livereload import Server
 from more_itertools import chunked
-import os
+from pathlib import Path
 import math
 
 BOOKS_PER_PAGE_NUMBER = 20
@@ -15,6 +15,7 @@ def on_reload():
 
     grouped_books_list = list(chunked(books_list, BOOKS_PER_PAGE_NUMBER))
     pages_amount = math.ceil(len(books_list) / BOOKS_PER_PAGE_NUMBER)
+    remove_outdated_pages(pages_amount)
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -36,8 +37,23 @@ def on_reload():
     print("Site rebuilded")
 
 
+def remove_outdated_pages(pages_amount):
+    paths_to_pages_list = list(Path('pages/').glob('index*.html'))
+    if len(paths_to_pages_list) == 0:
+        return
+
+    names_pages_set = {path.name for path in paths_to_pages_list}
+    expected_names_pages_set = {f'index{number}.html' for number in range(1, pages_amount + 1)}
+    outdated_names_set = expected_names_pages_set.symmetric_difference(names_pages_set)
+
+    while True:
+        if len(outdated_names_set) == 0:
+            return
+        Path(f'pages/{outdated_names_set.pop()}').unlink()
+
+
 def main():
-    os.makedirs('pages', exist_ok=True)
+    Path('pages').mkdir(parents=True, exist_ok=True)
 
     on_reload()
     server = Server()
@@ -47,4 +63,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
