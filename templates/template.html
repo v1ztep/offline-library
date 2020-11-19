@@ -55,7 +55,7 @@
             <div class="card mb-3" style="max-width: 540px;">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="../{{book_dict.image_path|urlencode}}" class="card-img" alt="{{book_dict.title}}, {{book_dict.author}}">
+                  <img src="../{{book.image_path|urlencode}}" class="card-img" alt="{{book.title}}, {{book.author}}">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -64,7 +64,7 @@
                     {% for genre in book.genres %}
                       <span class="badge badge-light">{{genre}}</span>
                     {% endfor %}
-                    <p class="card-text mt-3"><a href="../{{book_dict.book_path|urlencode}}" target="_blank">Читать</a></p>
+                    <p class="card-text mt-3"><a href="../{{book.book_path|urlencode}}" target="_blank">Читать</a></p>
                   </div>
                 </div>
               </div>
