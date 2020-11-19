@@ -7,7 +7,7 @@ from pathlib import Path
 BOOKS_PER_PAGE_NUMBER = 20
 
 
-def on_reload():
+def rebuild_site():
     with open("media/description.json", "r", encoding="utf8") as my_file:
         books_json = my_file.read()
     books = json.loads(books_json)
@@ -55,9 +55,9 @@ def remove_outdated_pages(pages_amount):
 def main():
     Path('pages').mkdir(parents=True, exist_ok=True)
 
-    on_reload()
+    rebuild_site()
     server = Server()
-    server.watch('templates/template.html', on_reload)
+    server.watch('templates/template.html', rebuild_site)
     server.serve(root='.')
 
 
