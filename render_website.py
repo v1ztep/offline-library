@@ -3,7 +3,6 @@ import json
 from livereload import Server
 from more_itertools import chunked
 from pathlib import Path
-import math
 
 BOOKS_PER_PAGE_NUMBER = 20
 
@@ -11,10 +10,10 @@ BOOKS_PER_PAGE_NUMBER = 20
 def on_reload():
     with open("media/description.json", "r", encoding="utf8") as my_file:
         books_json = my_file.read()
-    books_list = json.loads(books_json)
+    books = json.loads(books_json)
 
-    grouped_books_list = list(chunked(books_list, BOOKS_PER_PAGE_NUMBER))
-    pages_amount = math.ceil(len(books_list) / BOOKS_PER_PAGE_NUMBER)
+    grouped_books = list(chunked(books, BOOKS_PER_PAGE_NUMBER))
+    pages_amount = len(grouped_books)
     remove_outdated_pages(pages_amount)
 
     env = Environment(
@@ -23,11 +22,11 @@ def on_reload():
     )
     template = env.get_template('templates/template.html')
 
-    for page_current_number, per_page_books_list in enumerate(grouped_books_list, start=1):
-        grouped_by_two_books_list = list(chunked(per_page_books_list, 2))
+    for page_current_number, per_page_books in enumerate(grouped_books, start=1):
+        grouped_by_two_books = list(chunked(per_page_books, 2))
 
         rendered_page = template.render(
-            grouped_by_two_books_list=grouped_by_two_books_list,
+            grouped_by_two_books=grouped_by_two_books,
             pages_amount=pages_amount,
             page_current_number=page_current_number,
         )
@@ -38,18 +37,18 @@ def on_reload():
 
 
 def remove_outdated_pages(pages_amount):
-    paths_to_pages_list = list(Path('pages/').glob('index*.html'))
-    if len(paths_to_pages_list) == 0:
+    paths_to_pages = list(Path('pages/').glob('index*.html'))
+    if len(paths_to_pages) == 0:
         return
 
-    names_pages_set = {path.name for path in paths_to_pages_list}
-    expected_names_pages_set = {f'index{number}.html' for number in range(1, pages_amount + 1)}
-    outdated_names_set = expected_names_pages_set.symmetric_difference(names_pages_set)
+    names_pages = {path.name for path in paths_to_pages}
+    expected_names_pages = {f'index{number}.html' for number in range(1, pages_amount + 1)}
+    outdated_names = expected_names_pages.symmetric_difference(names_pages)
 
     while True:
-        if len(outdated_names_set) == 0:
+        if len(outdated_names) == 0:
             return
-        Path(f'pages/{outdated_names_set.pop()}').unlink()
+        Path(f'pages/{outdated_names.pop()}').unlink()
 
 
 def main():

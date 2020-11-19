@@ -49,8 +49,8 @@
 
   <div class="container">
     <div class="row">
-      {% for two_books_list in grouped_by_two_books_list %}
-        {% for book_dict in two_books_list %}
+      {% for two_books in grouped_by_two_books %}
+        {% for book in two_books %}
           <div class="col">
             <div class="card mb-3" style="max-width: 540px;">
               <div class="row no-gutters">
@@ -59,9 +59,9 @@
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{{book_dict.title}}</h5>
-                    <p class="card-text">{{book_dict.author}}</p>
-                    {% for genre in book_dict.genres %}
+                    <h5 class="card-title">{{book.title}}</h5>
+                    <p class="card-text">{{book.author}}</p>
+                    {% for genre in book.genres %}
                       <span class="badge badge-light">{{genre}}</span>
                     {% endfor %}
                     <p class="card-text mt-3"><a href="../{{book_dict.book_path|urlencode}}" target="_blank">Читать</a></p>
