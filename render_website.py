@@ -37,11 +37,11 @@ def rebuild_site():
 
 
 def remove_outdated_pages(pages_amount):
-    paths_to_pages = list(Path('pages/').glob('index*.html'))
-    if len(paths_to_pages) == 0:
+    pages_paths = list(Path('pages/').glob('index*.html'))
+    if not pages_paths:
         return
 
-    names_pages = {path.name for path in paths_to_pages}
+    names_pages = {path.name for path in pages_paths}
     expected_names_pages = {f'index{number}.html' for number in range(1, pages_amount + 1)}
     outdated_names = expected_names_pages.symmetric_difference(names_pages)
     print(outdated_names)
