@@ -41,9 +41,9 @@ def remove_outdated_pages(pages_amount):
     if not pages_paths:
         return
 
-    names_pages = {path.name for path in pages_paths}
-    expected_names_pages = {f'index{number}.html' for number in range(1, pages_amount + 1)}
-    outdated_names = expected_names_pages.symmetric_difference(names_pages)
+    pages_names = {path.name for path in pages_paths}
+    expected_pages_names = {f'index{number}.html' for number in range(1, pages_amount + 1)}
+    outdated_names = expected_pages_names.symmetric_difference(pages_names)
     print(outdated_names)
 
     while True:
